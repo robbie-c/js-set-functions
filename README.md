@@ -18,11 +18,11 @@ var set2 = new Set([2,3,4]);
 
 SetFunctions.intersection(set1, set2); // Set [ 2, 3 ]
 
-SetFunctions.add(set1, set2); // Set [ 1, 2, 3, 4 ]
-SetFunctions.union(set1, set2); // alias for add
+SetFunctions.union(set1, set2); // Set [ 1, 2, 3, 4 ]
+SetFunctions.add(set1, set2); // alias for union
 
-SetFunctions.subtract(set1, set2); // Set [ 1 ]
-SetFunctions.difference(set1, set2); // alias for subtract
+SetFunctions.difference(set1, set2); // Set [ 1 ]
+SetFunctions.subtract(set1, set2); // alias for difference
 
 SetFunctions.isEqual(set1, set2); // false
 SetFunctions.isEqual(set1, new Set([1, 2, 3])); // true
