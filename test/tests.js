@@ -1,7 +1,5 @@
 'use strict';
 if (typeof require !== 'undefined') {
-  require('babel/register');
-
   var expect = require('expect.js');
 
   var SetFunctions = require('..');
