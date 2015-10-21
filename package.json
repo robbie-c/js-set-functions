@@ -8,7 +8,7 @@
   },
   "main": "src/set-functions.js",
   "scripts": {
-    "prepublish": "mocha && gulp && esdoc -c esdoc.json"
+    "prepublish": "eslint src && mocha && gulp && esdoc -c esdoc.json"
   },
   "dependencies": {},
   "devDependencies": {
@@ -16,6 +16,7 @@
     "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "esdoc": "^0.4.0",
+    "eslint": "^1.7.2",
     "expect.js": "^0.3.1",
     "gulp": "^3.9.0",
     "gulp-sourcemaps": "^1.6.0",
