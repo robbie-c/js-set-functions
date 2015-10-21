@@ -9,7 +9,7 @@
   },
   "main": "src/set-functions.js",
   "scripts": {
-    "prepublish": "eslint src && mocha && gulp && esdoc -c esdoc.json"
+    "prepublish": "jslint src && mocha && gulp && esdoc -c esdoc.json"
   },
   "dependencies": {},
   "devDependencies": {
