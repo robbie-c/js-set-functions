@@ -32,11 +32,18 @@ export function intersection(a, b) {
 
   var result = new Set();
 
-  a.forEach(function (item) {
-    if (b.has(item)) {
-      result.add(item);
+  if (a && b) {
+    // should support b being an array
+    if (!b.has) {
+      b = new Set(b);
     }
-  });
+
+    a.forEach(function (item) {
+      if (b.has(item)) {
+        result.add(item);
+      }
+    });
+  }
 
   return result;
 }
@@ -53,11 +60,11 @@ export function union(a, b) {
 
   var result = new Set(a);
 
-  b.forEach(function (item) {
-    if (b.has(item)) {
+  if (b) {
+    b.forEach(function (item) {
       result.add(item);
-    }
-  });
+    });
+  }
 
   return result;
 }
@@ -81,13 +88,24 @@ export var add = union;
 export function difference(a, b) {
   'use strict';
 
+  if (!b) {
+    return new Set(a);
+  }
+
   var result = new Set();
 
-  a.forEach(function (item) {
-    if (!b.has(item)) {
-      result.add(item);
+  if (a) {
+
+    if (!b.has) {
+      b = new Set(b);
     }
-  });
+
+    a.forEach(function (item) {
+      if (!b.has(item)) {
+        result.add(item);
+      }
+    });
+  }
 
   return result;
 }
@@ -100,3 +118,53 @@ export function difference(a, b) {
  * @returns {Set}
  */
 export var subtract = difference;
+
+var BreakException = {};
+
+/**
+ * Check set equality
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {bool}
+ */
+export function isEqual(a, b) {
+  'use strict';
+
+  if (a === b) {
+    return true;
+  }
+  if (!a && !b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  if (!a.has) {
+    a = new Set(a);
+  }
+  if (!b.has) {
+    b = new Set(b);
+  }
+
+  if (a.size != b.size) {
+    return false;
+  }
+
+  try {
+    a.forEach(function (item) {
+      if (!b.has(item)) {
+        // short-circuit by throwing on first difference
+        throw BreakException
+      }
+    });
+  } catch (e) {
+    if (e === BreakException) {
+      return false;
+    } else {
+      // pass on any exceptions that we didn't generate
+      throw e;
+    }
+  }
+  return true;
+}

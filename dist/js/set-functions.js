@@ -6,10 +6,19 @@
  */
 
 /*
-    It seems that all methods of iteration (forEach, for-of, iterator) were approximately equal in performance, so I
-    used forEach as it is the most widely supported.
+ It seems that all methods of iteration (forEach, for-of, iterator) were
+ approximately equal in performance, so I used forEach as it is the most
+ widely supported.
 
-    See http://jsperf.com/set-iteration
+ There are some platforms that provide Set but do not have all ES6 features
+ (e.g. Set might be provided through a polyfill) so we do want to limit ES6
+ features.
+
+ Babel requires Symbol to transform for-of.
+
+ Using ES6 modules is fine as browserify will handle this.
+
+ See http://jsperf.com/set-iteration
  */
 
 /**
@@ -22,24 +31,32 @@
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-    value: true
+  value: true
 });
 exports.intersection = intersection;
 exports.union = union;
 exports.difference = difference;
+exports.isEqual = isEqual;
 
 function intersection(a, b) {
-    'use strict';
+  'use strict';
 
-    var result = new Set();
+  var result = new Set();
+
+  if (a && b) {
+    // should support b being an array
+    if (!b.has) {
+      b = new Set(b);
+    }
 
     a.forEach(function (item) {
-        if (b.has(item)) {
-            result.add(item);
-        }
+      if (b.has(item)) {
+        result.add(item);
+      }
     });
+  }
 
-    return result;
+  return result;
 }
 
 /**
@@ -51,19 +68,26 @@ function intersection(a, b) {
  */
 
 function union(a, b) {
-    'use strict';
+  'use strict';
 
-    var result = new Set(a);
+  var result = new Set(a);
 
+  if (b) {
     b.forEach(function (item) {
-        if (b.has(item)) {
-            result.add(item);
-        }
+      result.add(item);
     });
+  }
 
-    return result;
+  return result;
 }
 
+/**
+ * Alias for union
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {Set}
+ */
 var add = union;
 
 exports.add = add;
@@ -76,28 +100,90 @@ exports.add = add;
  */
 
 function difference(a, b) {
-    'use strict';
+  'use strict';
 
-    var result = new Set();
+  if (!b) {
+    return new Set(a);
+  }
+
+  var result = new Set();
+
+  if (a) {
+
+    if (!b.has) {
+      b = new Set(b);
+    }
 
     a.forEach(function (item) {
-        if (!b.has(item)) {
-            result.add(item);
-        }
+      if (!b.has(item)) {
+        result.add(item);
+      }
     });
+  }
 
-    return result;
+  return result;
 }
 
 /**
- * The set of items in a but not in b
+ * Alias for difference
  *
  * @param {Set} a
  * @param {Set} b
  * @returns {Set}
  */
 var subtract = difference;
+
 exports.subtract = subtract;
+var BreakException = {};
+
+/**
+ * Check set equality
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {bool}
+ */
+
+function isEqual(a, b) {
+  'use strict';
+
+  if (a === b) {
+    return true;
+  }
+  if (!a && !b) {
+    return true;
+  }
+  if (!a || !b) {
+    return false;
+  }
+  if (!a.has) {
+    a = new Set(a);
+  }
+  if (!b.has) {
+    b = new Set(b);
+  }
+
+  if (a.size != b.size) {
+    return false;
+  }
+
+  try {
+    a.forEach(function (item) {
+      if (!b.has(item)) {
+        // short-circuit by throwing on first difference
+        throw BreakException;
+      }
+    });
+  } catch (e) {
+    if (e === BreakException) {
+      return false;
+    } else {
+      // pass on any exceptions that we didn't generate
+      throw e;
+    }
+  }
+  return true;
+}
 
 },{}]},{},[1])(1)
 });
