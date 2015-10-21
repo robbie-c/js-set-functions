@@ -26,7 +26,7 @@ SetFunctions.difference(set1, set2); // alias for subtract
 
 SetFunctions.isEqual(set1, set2); // false
 SetFunctions.isEqual(set1, new Set([1, 2, 3])); // true
-(new Set([1,2,3])) == (new Set([1,2,3]));
+(new Set([1,2,3])) == (new Set([1,2,3])); // false, same with ===
 
 // these functions can also take Arrays, and will treat them as Sets
 SetFunctions.isEqual([1, 1, 2], [2, 1])); // true
