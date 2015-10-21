@@ -1,6 +1,7 @@
 {
   "name": "set-functions",
-  "version": "0.0.1",
+  "description": "Common functions for set operations",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
