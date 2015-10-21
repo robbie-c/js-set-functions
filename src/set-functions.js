@@ -1,7 +1,9 @@
 /**
  * JavaScript Set operations
  *
- * All functions expect an ES6 Set type or a compatible polyfill.
+ * All functions expect an ES6 Set type or a compatible polyfill to be available
+ * in the global namespace.
+ * @module set-functions
  */
 
 /*
@@ -27,7 +29,7 @@
  * @param {Set} b
  * @returns {Set}
  */
-export function intersection(a, b) {
+module.exports.intersection = function intersection(a, b) {
   'use strict';
 
   var result = new Set();
@@ -46,7 +48,7 @@ export function intersection(a, b) {
   }
 
   return result;
-}
+};
 
 /**
  * The set of items in a or b
@@ -55,7 +57,7 @@ export function intersection(a, b) {
  * @param {Set} b
  * @returns {Set}
  */
-export function union(a, b) {
+module.exports.union = function union(a, b) {
   'use strict';
 
   var result = new Set(a);
@@ -67,16 +69,7 @@ export function union(a, b) {
   }
 
   return result;
-}
-
-/**
- * Alias for union
- *
- * @param {Set} a
- * @param {Set} b
- * @returns {Set}
- */
-export var add = union;
+};
 
 /**
  * The set of items in a but not in b
@@ -85,7 +78,7 @@ export var add = union;
  * @param {Set} b
  * @returns {Set}
  */
-export function difference(a, b) {
+module.exports.difference = function difference(a, b) {
   'use strict';
 
   if (!b) {
@@ -108,16 +101,7 @@ export function difference(a, b) {
   }
 
   return result;
-}
-
-/**
- * Alias for difference
- *
- * @param {Set} a
- * @param {Set} b
- * @returns {Set}
- */
-export var subtract = difference;
+};
 
 var BreakException = {};
 
@@ -128,7 +112,7 @@ var BreakException = {};
  * @param {Set} b
  * @returns {bool}
  */
-export function isEqual(a, b) {
+module.exports.isEqual = function isEqual(a, b) {
   'use strict';
 
   if (a === b) {
@@ -167,4 +151,22 @@ export function isEqual(a, b) {
     }
   }
   return true;
-}
+};
+
+/**
+ * Alias for union
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {Set}
+ */
+module.exports.add = module.exports.union;
+
+/**
+ * Alias for difference
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {Set}
+ */
+module.exports.subtract = module.exports.difference;

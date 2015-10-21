@@ -30,15 +30,7 @@
  */
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-exports.intersection = intersection;
-exports.union = union;
-exports.difference = difference;
-exports.isEqual = isEqual;
-
-function intersection(a, b) {
+module.exports.intersection = function intersection(a, b) {
   'use strict';
 
   var result = new Set();
@@ -57,7 +49,7 @@ function intersection(a, b) {
   }
 
   return result;
-}
+};
 
 /**
  * The set of items in a or b
@@ -66,8 +58,7 @@ function intersection(a, b) {
  * @param {Set} b
  * @returns {Set}
  */
-
-function union(a, b) {
+module.exports.union = function union(a, b) {
   'use strict';
 
   var result = new Set(a);
@@ -79,18 +70,8 @@ function union(a, b) {
   }
 
   return result;
-}
+};
 
-/**
- * Alias for union
- *
- * @param {Set} a
- * @param {Set} b
- * @returns {Set}
- */
-var add = union;
-
-exports.add = add;
 /**
  * The set of items in a but not in b
  *
@@ -98,8 +79,7 @@ exports.add = add;
  * @param {Set} b
  * @returns {Set}
  */
-
-function difference(a, b) {
+module.exports.difference = function difference(a, b) {
   'use strict';
 
   if (!b) {
@@ -122,18 +102,8 @@ function difference(a, b) {
   }
 
   return result;
-}
+};
 
-/**
- * Alias for difference
- *
- * @param {Set} a
- * @param {Set} b
- * @returns {Set}
- */
-var subtract = difference;
-
-exports.subtract = subtract;
 var BreakException = {};
 
 /**
@@ -143,8 +113,7 @@ var BreakException = {};
  * @param {Set} b
  * @returns {bool}
  */
-
-function isEqual(a, b) {
+module.exports.isEqual = function isEqual(a, b) {
   'use strict';
 
   if (a === b) {
@@ -183,7 +152,11 @@ function isEqual(a, b) {
     }
   }
   return true;
-}
+};
+
+// Aliases
+module.exports.add = module.exports.union;
+module.exports.subtract = module.exports.difference;
 
 },{}]},{},[1])(1)
 });
