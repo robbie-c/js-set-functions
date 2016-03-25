@@ -9,7 +9,14 @@
   },
   "main": "src/set-functions.js",
   "scripts": {
-    "prepublish": "jslint src && mocha && gulp && esdoc -c esdoc.json"
+    "lint": "eslint src",
+    "build": "gulp",
+    "test": "mocha",
+    "doc": "jsdoc -c jsdoc.json",
+    "all": "npm run test && npm run lint && npm run doc",
+
+    "pretest": "npm run build",
+    "prepublish": "npm run all"
   },
   "dependencies": {},
   "devDependencies": {
