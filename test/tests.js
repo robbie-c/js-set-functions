@@ -179,5 +179,43 @@ versions.forEach(function(version) {
         expect(SetFunctions.isEqual(result, expected)).to.be.ok();
       });
     });
+
+    describe('symmetricDifference', function () {
+      it('should do basic symmetric difference', function () {
+        var a = new Set([1, 2, 3]);
+        var b = new Set([2, 3, 4]);
+        var result = SetFunctions.symmetricDifference(a, b);
+        var expected = new Set([1, 4]);
+
+        expect(SetFunctions.isEqual(result, expected)).to.be.ok();
+      });
+
+      it('should work with arrays', function () {
+        var a = [1, 2, 3];
+        var b = [2, 3, 4];
+        var result = SetFunctions.symmetricDifference(a, b);
+        var expected = new Set([1, 4]);
+
+        expect(SetFunctions.isEqual(result, expected)).to.be.ok();
+      });
+
+      it('should handle undefined for the first argument', function () {
+        var a = undefined;
+        var b = new Set([1, 3, 4]);
+        var result = SetFunctions.symmetricDifference(a, b);
+        var expected = new Set([]);
+
+        expect(SetFunctions.isEqual(result, expected)).to.be.ok();
+      });
+
+      it('should handle undefined for the second argument', function () {
+        var a = [1, 2];
+        var b = undefined;
+        var result = SetFunctions.symmetricDifference(a, b);
+        var expected = new Set([1, 2]);
+
+        expect(SetFunctions.isEqual(result, expected)).to.be.ok();
+      });
+    });
   });
 });

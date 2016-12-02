@@ -103,6 +103,47 @@ module.exports.difference = function difference(a, b) {
   return result;
 };
 
+/**
+ * The set of items in a and b but not in their intersection.
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {Set}
+ */
+module.exports.symmetricDifference = function symmetricDifference(a, b) {
+  'use strict';
+
+  if (!b) {
+    return new Set(a);
+  }
+
+  var result = new Set();
+
+  if (a) {
+    if (!b.has) {
+      b = new Set(b);
+    }
+
+    if (!a.has) {
+      a = new Set(a);
+    }
+
+    a.forEach(function (item) {
+      if (!b.has(item)) {
+        result.add(item);
+      }
+    });
+
+    b.forEach(function (item) {
+      if (!a.has(item)) {
+        result.add(item);
+      }
+    });
+  }
+
+  return result;
+};
+
 var BreakException = {};
 
 /**
@@ -170,3 +211,12 @@ module.exports.add = module.exports.union;
  * @returns {Set}
  */
 module.exports.subtract = module.exports.difference;
+
+/**
+ * Alias for symmetric difference
+ *
+ * @param {Set} a
+ * @param {Set} b
+ * @returns {Set}
+ */
+module.exports.disjunction = module.exports.symmetricDifference;

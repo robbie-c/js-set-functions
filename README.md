@@ -24,6 +24,9 @@ SetFunctions.add(set1, set2); // alias for union
 SetFunctions.difference(set1, set2); // Set [ 1 ]
 SetFunctions.subtract(set1, set2); // alias for difference
 
+SetFunctions.symmetricDifference(set1, set2); // Set [1, 4]
+SetFunctions.disjunction(set1, set2); // alias for symmetricDifference
+
 SetFunctions.isEqual(set1, set2); // false
 SetFunctions.isEqual(set1, new Set([1, 2, 3])); // true
 (new Set([1,2,3])) == (new Set([1,2,3])); // false, same with ===
