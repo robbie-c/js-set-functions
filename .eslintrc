@@ -5,15 +5,20 @@
     "node": true,
     "es6": true
   },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "forOf": false,
+      "impliedStrict": true,
+      "es6": true
+    }
+  },
   "ecmaFeatures": {
     "modules": true
   },
   "rules": {
     "strict": 0,
-    "no-var": 0,
-    "no-param-reassign": 0,
-    "prefer-arrow-callback": 0,
-    "func-names": 0,
-    "vars-on-top": 0
+    "no-param-reassign": 0
   }
 }
