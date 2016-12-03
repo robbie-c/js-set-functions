@@ -13,9 +13,10 @@
     "build": "gulp",
     "test": "mocha",
     "doc": "jsdoc -c jsdoc.json",
+    "clean": "rm -rf dist",
     "all": "npm run test && npm run lint && npm run doc",
     "pretest": "npm run build",
-    "prepublish": "npm run all"
+    "prepublish": "npm run clean && npm run all"
   },
   "dependencies": {},
   "devDependencies": {
