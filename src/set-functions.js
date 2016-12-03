@@ -32,7 +32,7 @@
 module.exports.intersection = function intersection(a, b) {
   'use strict';
 
-  var result = new Set();
+  const result = new Set();
 
   if (a && b) {
     // should support b being an array
@@ -60,7 +60,7 @@ module.exports.intersection = function intersection(a, b) {
 module.exports.union = function union(a, b) {
   'use strict';
 
-  var result = new Set(a);
+  const result = new Set(a);
 
   if (b) {
     b.forEach(function (item) {
@@ -85,7 +85,7 @@ module.exports.difference = function difference(a, b) {
     return new Set(a);
   }
 
-  var result = new Set();
+  const result = new Set();
 
   if (a) {
     if (!b.has) {
@@ -116,7 +116,7 @@ module.exports.symmetricDifference = function symmetricDifference(a, b) {
     return new Set(a);
   }
 
-  var result = new Set();
+  const result = new Set();
 
   if (a) {
     if (!b.has) {
@@ -143,7 +143,7 @@ module.exports.symmetricDifference = function symmetricDifference(a, b) {
   return result;
 };
 
-var BreakException = {};
+const BreakException = {};
 
 /**
  * Check set equality
