@@ -88,7 +88,6 @@ module.exports.difference = function difference(a, b) {
   var result = new Set();
 
   if (a) {
-
     if (!b.has) {
       b = new Set(b);
     }
@@ -151,7 +150,7 @@ var BreakException = {};
  *
  * @param {Set} a
  * @param {Set} b
- * @returns {bool}
+ * @returns {boolean}
  */
 module.exports.isEqual = function isEqual(a, b) {
   'use strict';
@@ -172,7 +171,7 @@ module.exports.isEqual = function isEqual(a, b) {
     b = new Set(b);
   }
 
-  if (a.size != b.size) {
+  if (a.size !== b.size) {
     return false;
   }
 
@@ -180,16 +179,15 @@ module.exports.isEqual = function isEqual(a, b) {
     a.forEach(function (item) {
       if (!b.has(item)) {
         // short-circuit by throwing on first difference
-        throw BreakException
+        throw BreakException;
       }
     });
   } catch (e) {
     if (e === BreakException) {
       return false;
-    } else {
-      // pass on any exceptions that we didn't generate
-      throw e;
     }
+    // pass on any exceptions that we didn't generate
+    throw e;
   }
   return true;
 };
