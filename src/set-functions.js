@@ -40,7 +40,7 @@ module.exports.intersection = function intersection(a, b) {
       b = new Set(b);
     }
 
-    a.forEach(function (item) {
+    a.forEach((item) => {
       if (b.has(item)) {
         result.add(item);
       }
@@ -63,7 +63,7 @@ module.exports.union = function union(a, b) {
   const result = new Set(a);
 
   if (b) {
-    b.forEach(function (item) {
+    b.forEach((item) => {
       result.add(item);
     });
   }
@@ -92,7 +92,7 @@ module.exports.difference = function difference(a, b) {
       b = new Set(b);
     }
 
-    a.forEach(function (item) {
+    a.forEach((item) => {
       if (!b.has(item)) {
         result.add(item);
       }
@@ -127,13 +127,13 @@ module.exports.symmetricDifference = function symmetricDifference(a, b) {
       a = new Set(a);
     }
 
-    a.forEach(function (item) {
+    a.forEach((item) => {
       if (!b.has(item)) {
         result.add(item);
       }
     });
 
-    b.forEach(function (item) {
+    b.forEach((item) => {
       if (!a.has(item)) {
         result.add(item);
       }
@@ -176,7 +176,7 @@ module.exports.isEqual = function isEqual(a, b) {
   }
 
   try {
-    a.forEach(function (item) {
+    a.forEach((item) => {
       if (!b.has(item)) {
         // short-circuit by throwing on first difference
         throw BreakException;
