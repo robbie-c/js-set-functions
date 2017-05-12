@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>Mocha Tests</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.3.3/mocha.css" />
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
 </head>
 <body>
 <div id="mocha"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.23.0/polyfill.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.3.3/mocha.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/expect.js/0.2.0/expect.js"></script>
+<script src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+<script src="node_modules/mocha/mocha.js"></script>
+<script src="node_modules/expect.js/index.js"></script>
 <script src="dist/js/set-functions.min.js"></script>
 <script>mocha.setup('bdd')</script>
 <script src="test/tests.js"></script>
